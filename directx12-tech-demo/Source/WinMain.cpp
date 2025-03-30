@@ -1,5 +1,9 @@
 #include <Windows.h>
 
+// ////////////////////////////////////////
+// Defines
+// ////////////////////////////////////////
+
 // I prefer define const variables, or you can use wcscpy_s and TEXT in runtime
 const WCHAR* ProgramName = TEXT("directx12-tech-demo");
 const WCHAR* WindowTitle = TEXT("DirectX 12 Tech Demo");
@@ -10,11 +14,15 @@ const INT WindowHeight = 768; // Default window height in Windows
 #define HInstance() GetModuleHandle(NULL) // solution for only windows programs, without platform-independent layer
 // discussion: https://stackoverflow.com/questions/21718027/getmodulehandlenull-vs-hinstance
 
+// ////////////////////////////////////////
+// Entry Point
+// ////////////////////////////////////////
 
-// declaration for usage
+// declarations
 WNDCLASSEX CreateWindowClass();
+LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam);
 
-/// <summary>                main(), but for Windows               </summary>
+/// <summary>                    main(), but for Windows               </summary>
 /// <param name="hInstance">     Windows instance of this program      </param>
 /// <param name="hPrevInstance"> Previous instance of legacy programs  </param>
 /// <param name="lpCmdLine">     C-string of input arguments in launch </param>
@@ -66,6 +74,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return 0;
 }
 
+// ////////////////////////////////////////
+// Definitions
+// ////////////////////////////////////////
+
+/// <summary> Create new WNDCLASSEX for this app </summary>
 WNDCLASSEX CreateWindowClass()
 {
 	WNDCLASSEX wcex{}; // class with information about self window
@@ -88,7 +101,24 @@ WNDCLASSEX CreateWindowClass()
 
 	wcex.hInstance = HInstance(); // add self instance for this
 
-	wcex.lpfnWndProc = DefWindowProc; // for all behaviour, that I doesn't implement for window
+	wcex.lpfnWndProc = CreateWindowProcess; // for all behaviour, that I doesn't implement for window
 
 	return wcex;
+}
+
+/// <summary>              Create new WindowProc, for this app   </summary>
+/// <param name="hWnd">    Copy of window handler                </param>
+/// <param name="message"> Message type parameter (clos, resize) </param>
+/// <param name="wparam">  Parameter W for message               </param>
+/// <param name="lparam">  Parameter L for message               </param>
+LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam)
+{
+	switch (message)
+	{
+	case WM_DESTROY: // if message was close window
+		PostQuitMessage(0); // shutdown program itself
+		break;
+	}
+
+	return DefWindowProc(hWnd, message, wparam, lparam);
 }
