@@ -5,13 +5,14 @@
 // ////////////////////////////////////////
 
 // I prefer define const variables, or you can use wcscpy_s and TEXT in runtime
-const WCHAR* ProgramName = TEXT("directx12-tech-demo");
-const WCHAR* WindowTitle = TEXT("DirectX 12 Tech Demo");
+WCHAR ProgramName[MAX_NAME_LENGTH];
+WCHAR WindowTitle[MAX_NAME_LENGTH];
 
-const INT WindowWidth = 1366; // Default window width in Windows
-const INT WindowHeight = 768; // Default window height in Windows
+// Initial Window size
+INT InitialWindowWidth;
+INT InitialWindowHeight;
 
-const HICON hIcon = LoadIcon(HInstance(), MAKEINTRESOURCE(LOGO_ICO));
+HICON hIcon; // default program icon
 
 // ////////////////////////////////////////
 // Entry Point
@@ -28,12 +29,20 @@ LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPA
 /// <param name="nCmdShow">      Command to show window or not         </param>
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
 {
+	// Initialize Global Variables
+	LoadString(HInstance(), IDS_PROGRAMNAME, ProgramName, MAX_NAME_LENGTH);
+	LoadString(HInstance(), IDS_WINDOWNAME,  WindowTitle, MAX_NAME_LENGTH);
+
+	InitialWindowWidth = 1366; // Default window width in Windows
+	InitialWindowHeight = 768; // Default window height in Windows
+	hIcon = LoadIcon(HInstance(), MAKEINTRESOURCE(LOGO_ICO));
+
 	// Create Window Class
 
 	WNDCLASSEX wcex = CreateWindowClass();
 	RegisterClassEx(&wcex);
 
-	// Create and Display our Window
+	// Create and Display Window
 
 	HWND hWnd = CreateWindow(
 		ProgramName,         // Program name in Windows
@@ -41,8 +50,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		WS_OVERLAPPEDWINDOW, // Window Style, default
 		CW_USEDEFAULT,       // Initial X position
 		0,                   // Initial Y position
-		WindowWidth,         // Initial Width
-		WindowHeight,        // Initial Height
+		InitialWindowWidth,  // Initial Width
+		InitialWindowHeight, // Initial Height
 		nullptr,             // Parent Window, if parent close - this close
 		nullptr,             // This is game engine, no menu
 		HInstance(),         // Instance of this program
@@ -51,7 +60,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	if (!hWnd) // not assert because it's Windows error
 	{
-		MessageBox(0, L"Failed to Create Window", 0, 0);
+		MessageBox(0, TEXT("Failed to Create Window"), 0, 0);
 		return 0;
 	}
 
