@@ -1,5 +1,11 @@
 #include "pch.h"
 
+/* ---------------------------------------------- */
+/* Filename: WinMain.cpp */
+/* Author: vertoker (Based on OlympusMonsTutorials) */
+/* License: MIT License */
+/* ---------------------------------------------- */
+
 #pragma region Global Variables
 
 // I prefer define const variables, or you can use wcscpy_s and TEXT in runtime
