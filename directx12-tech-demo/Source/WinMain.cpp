@@ -1,8 +1,6 @@
 #include "pch.h"
 
-// ////////////////////////////////////////
-// Defines
-// ////////////////////////////////////////
+#pragma region Global Variables
 
 // I prefer define const variables, or you can use wcscpy_s and TEXT in runtime
 WCHAR ProgramName[MAX_NAME_LENGTH];
@@ -14,13 +12,20 @@ INT InitialWindowHeight;
 
 HICON hIcon; // default program icon
 
-// ////////////////////////////////////////
-// Entry Point
-// ////////////////////////////////////////
+#pragma endregion
 
-// declarations
-WNDCLASSEX CreateWindowClass();
+#pragma region Declarations
+
+VOID InitializeGlobalVariables();
+VOID InitializeWindowClass();
+VOID InitializeWindow();
+VOID MessageLoop();
+
 LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam);
+
+#pragma endregion
+
+#pragma region Entry Point
 
 /// <summary>                    main(), but for Windows               </summary>
 /// <param name="hInstance">     Windows instance of this program      </param>
@@ -29,65 +34,28 @@ LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPA
 /// <param name="nCmdShow">      Command to show window or not         </param>
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
 {
-	// Initialize Global Variables
+	InitializeGlobalVariables();
+	InitializeWindowClass();
+	InitializeWindow();
+	MessageLoop();
+	return 0;
+}
+
+#pragma endregion
+
+#pragma region Definitions
+
+VOID InitializeGlobalVariables()
+{
 	LoadString(HInstance(), IDS_PROGRAMNAME, ProgramName, MAX_NAME_LENGTH);
-	LoadString(HInstance(), IDS_WINDOWNAME,  WindowTitle, MAX_NAME_LENGTH);
+	LoadString(HInstance(), IDS_WINDOWNAME, WindowTitle, MAX_NAME_LENGTH);
 
 	InitialWindowWidth = 1366; // Default window width in Windows
 	InitialWindowHeight = 768; // Default window height in Windows
 	hIcon = LoadIcon(HInstance(), MAKEINTRESOURCE(LOGO_ICO));
-
-	// Create Window Class
-
-	WNDCLASSEX wcex = CreateWindowClass();
-	RegisterClassEx(&wcex);
-
-	// Create and Display Window
-
-	HWND hWnd = CreateWindow(
-		ProgramName,         // Program name in Windows
-		WindowTitle,         // Window Title itself
-		WS_OVERLAPPEDWINDOW, // Window Style, default
-		CW_USEDEFAULT,       // Initial X position
-		0,                   // Initial Y position
-		InitialWindowWidth,  // Initial Width
-		InitialWindowHeight, // Initial Height
-		nullptr,             // Parent Window, if parent close - this close
-		nullptr,             // This is game engine, no menu
-		HInstance(),         // Instance of this program
-		nullptr              // Specific instructions for Window
-	);
-
-	if (!hWnd) // not assert because it's Windows error
-	{
-		MessageBox(0, TEXT("Failed to Create Window"), 0, 0);
-		return 0;
-	}
-
-	ShowWindow(hWnd, SW_SHOW); // show window with SHOW command (nCmdShow by default)
-
-	// Listen for Message events
-
-	MSG msg = { 0 }; // message class for events
-
-	while (msg.message != WM_QUIT) // run program until received message is quit
-	{
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) // if any messages are received
-		{
-			TranslateMessage(&msg); // translate messages
-			DispatchMessage(&msg);  // send messages to Windows system
-		}
-	}
-
-	return 0;
 }
 
-// ////////////////////////////////////////
-// Definitions
-// ////////////////////////////////////////
-
-/// <summary> Create new WNDCLASSEX for this app </summary>
-WNDCLASSEX CreateWindowClass()
+VOID InitializeWindowClass()
 {
 	WNDCLASSEX wcex{}; // class with information about self window
 
@@ -111,7 +79,46 @@ WNDCLASSEX CreateWindowClass()
 
 	wcex.lpfnWndProc = CreateWindowProcess; // for all behaviour, that I doesn't implement for window
 
-	return wcex;
+	RegisterClassEx(&wcex);
+}
+
+VOID InitializeWindow()
+{
+	HWND hWnd = CreateWindow(
+		ProgramName,         // Program name in Windows
+		WindowTitle,         // Window Title itself
+		WS_OVERLAPPEDWINDOW, // Window Style, default
+		CW_USEDEFAULT,       // Initial X position
+		0,                   // Initial Y position
+		InitialWindowWidth,  // Initial Width
+		InitialWindowHeight, // Initial Height
+		nullptr,             // Parent Window, if parent close - this close
+		nullptr,             // This is game engine, no menu
+		HInstance(),         // Instance of this program
+		nullptr              // Specific instructions for Window
+	);
+
+	if (!hWnd) // not assert because it's Windows error
+	{
+		MessageBox(0, TEXT("Failed to Create Window"), 0, 0);
+		PostQuitMessage(0);
+	}
+
+	ShowWindow(hWnd, SW_SHOW); // show window with SHOW command (nCmdShow by default)
+}
+
+VOID MessageLoop()
+{
+	MSG msg = { 0 }; // message class for events
+
+	while (msg.message != WM_QUIT) // run program until received message is quit
+	{
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) // if any messages are received
+		{
+			TranslateMessage(&msg); // translate messages
+			DispatchMessage(&msg);  // send messages to Windows system
+		}
+	}
 }
 
 /// <summary>              Create new WindowProc, for this app   </summary>
@@ -130,3 +137,5 @@ LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPA
 
 	return DefWindowProc(hWnd, message, wparam, lparam);
 }
+
+#pragma endregion
