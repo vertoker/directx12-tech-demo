@@ -1,11 +1,16 @@
+/* ---------------------------------------------------------- */
+/* Filename: WinMain.cpp                                      */
+/* Author: vertoker (Based on OlympusMonsTutorials)           */
+/* License: MIT License                                       */
+/* ---------------------------------------------------------- */
+
+
+
 #include "pch.h"
 
-/* ---------------------------------------------- */
-/* Filename: WinMain.cpp */
-/* Author: vertoker (Based on OlympusMonsTutorials) */
-/* License: MIT License */
-/* ---------------------------------------------- */
-
+/* ---------------------------------------------------------- */
+/* Global Variables                                           */
+/* ---------------------------------------------------------- */
 #pragma region Global Variables
 
 // I prefer define const variables, or you can use wcscpy_s and TEXT in runtime
@@ -19,7 +24,11 @@ INT InitialWindowHeight;
 HICON hIcon; // default program icon
 
 #pragma endregion
+/* ---------------------------------------------------------- */
 
+/* ---------------------------------------------------------- */
+/* Declarations                                               */
+/* ---------------------------------------------------------- */
 #pragma region Declarations
 
 VOID InitializeGlobalVariables();
@@ -30,7 +39,11 @@ VOID MessageLoop();
 LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam);
 
 #pragma endregion
+/* ---------------------------------------------------------- */
 
+/* ---------------------------------------------------------- */
+/* Entry Point                                                */
+/* ---------------------------------------------------------- */
 #pragma region Entry Point
 
 /// <summary>                    main(), but for Windows               </summary>
@@ -49,6 +62,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 #pragma endregion
 
+/* ---------------------------------------------------------- */
+/* Definitions                                                */
+/* ---------------------------------------------------------- */
 #pragma region Definitions
 
 VOID InitializeGlobalVariables()
@@ -108,6 +124,7 @@ VOID InitializeWindow()
 	{
 		MessageBox(0, TEXT("Failed to Create Window"), 0, 0);
 		PostQuitMessage(0);
+		return;
 	}
 
 	ShowWindow(hWnd, SW_SHOW); // show window with SHOW command (nCmdShow by default)
@@ -145,3 +162,4 @@ LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPA
 }
 
 #pragma endregion
+/* ---------------------------------------------------------- */
