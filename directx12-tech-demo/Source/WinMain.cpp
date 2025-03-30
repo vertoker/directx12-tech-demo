@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include "pch.h"
 
 // ////////////////////////////////////////
 // Defines
@@ -11,8 +11,7 @@ const WCHAR* WindowTitle = TEXT("DirectX 12 Tech Demo");
 const INT WindowWidth = 1366; // Default window width in Windows
 const INT WindowHeight = 768; // Default window height in Windows
 
-#define HInstance() GetModuleHandle(NULL) // solution for only windows programs, without platform-independent layer
-// discussion: https://stackoverflow.com/questions/21718027/getmodulehandlenull-vs-hinstance
+const HICON hIcon = LoadIcon(HInstance(), MAKEINTRESOURCE(LOGO_ICO));
 
 // ////////////////////////////////////////
 // Entry Point
@@ -93,8 +92,8 @@ WNDCLASSEX CreateWindowClass()
 	wcex.hbrBackground = (HBRUSH)GetStockObject(NULL_BRUSH); // set background color for window is white
 
 	// Set icons of program, set later
-	wcex.hIcon = LoadIcon(0, IDI_APPLICATION);   // icon from top left corner of window
-	wcex.hIconSm = LoadIcon(0, IDI_APPLICATION); // icon for task bar
+	wcex.hIcon = hIcon;   // icon from top left corner of window
+	wcex.hIconSm = hIcon; // icon for task bar
 
 	wcex.lpszClassName = ProgramName; // add name for window
 	wcex.lpszMenuName = nullptr;      // menu name for game is not normally included
