@@ -19,13 +19,34 @@
     <Filter Include="Source\pch">
       <UniqueIdentifier>{886187bc-3146-4198-98e5-c1a671b27ef9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Private\Platform">
+      <UniqueIdentifier>{a22a3c15-8fe9-4163-b894-5fc02752d8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Private\Platform\WIN32">
+      <UniqueIdentifier>{cf826b3a-d186-4a4b-9695-316cd63a9299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Public\Platform">
+      <UniqueIdentifier>{bbc21335-227f-4a14-bde6-bfca1078fd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Public\Platform\WIN32">
+      <UniqueIdentifier>{06f3cd7f-6b6f-41c8-8109-f2d77317d976}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\OlympusEngine.cpp">
       <Filter>Source\pch</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Platform\WIN32\IApplication.cpp">
+      <Filter>Source\Private\Platform\WIN32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Platform\WIN32\IApplication.h">
+      <Filter>Source\Public\Platform\WIN32</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\WIN32\WinEntry.h">
+      <Filter>Source\Public\Platform\WIN32</Filter>
+    </ClInclude>
     <ClInclude Include="Source\OlympusEngine.h">
       <Filter>Source\pch</Filter>
     </ClInclude>

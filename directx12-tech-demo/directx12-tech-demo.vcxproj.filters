@@ -39,7 +39,7 @@
       <Filter>Source\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\Application.h">
-      <Filter>Source\Private</Filter>
+      <Filter>Source\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

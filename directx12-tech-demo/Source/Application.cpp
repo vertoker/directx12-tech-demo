@@ -14,7 +14,6 @@ VOID Application::Initialize()
 {
 
 }
-
 VOID Application::Update()
 {
 
