@@ -51,14 +51,14 @@ LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPA
 /// <param name="hPrevInstance"> Previous instance of legacy programs  </param>
 /// <param name="lpCmdLine">     C-string of input arguments in launch </param>
 /// <param name="nCmdShow">      Command to show window or not         </param>
-int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
+/*int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
 {
 	InitializeGlobalVariables();
 	InitializeWindowClass();
 	InitializeWindow();
 	MessageLoop();
 	return 0;
-}
+}*/
 
 #pragma endregion
 

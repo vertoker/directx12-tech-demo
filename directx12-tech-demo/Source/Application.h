@@ -1,7 +1,9 @@
 #ifndef __APPLICATION_H
 #define __APPLICATION_H
 
-class Application
+#include "Platform/WIN32/IApplication.h"
+
+class Application : public IApplication
 {
 public:
 	Application();

@@ -10,4 +10,6 @@
 
 const size_t MAX_NAME_LENGTH = 256;
 
+#include "Application.h"
+
 #endif // _PCH_H
