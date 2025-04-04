@@ -31,6 +31,12 @@
     <Filter Include="Source\Public\Platform\WIN32">
       <UniqueIdentifier>{06f3cd7f-6b6f-41c8-8109-f2d77317d976}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Private\Common">
+      <UniqueIdentifier>{bd453bb7-f2a9-43b2-9fba-2b649a02b46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Public\Common">
+      <UniqueIdentifier>{bde7b8ec-bc90-4a85-9c9f-3a7793016d6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\OlympusEngine.cpp">
@@ -38,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="Source\Platform\WIN32\IApplication.cpp">
       <Filter>Source\Private\Platform\WIN32</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Logger.cpp">
+      <Filter>Source\Private\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +57,12 @@
       <Filter>Source\Public\Platform\WIN32</Filter>
     </ClInclude>
     <ClInclude Include="Source\OlympusEngine.h">
+      <Filter>Source\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common\Logger.h">
+      <Filter>Source\Public\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OlympusPCH.h">
       <Filter>Source\pch</Filter>
     </ClInclude>
   </ItemGroup>

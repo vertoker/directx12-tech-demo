@@ -1,7 +1,7 @@
 #ifndef __WIN32_IAPPLICATION_H
 #define __WIN32_IAPPLICATION_H
 
-#include "OlympusEngine.h"
+#include "OlympusPCH.h"
 
 #define ENTRYAPP(x) IApplication* EntryApplication() { return new x; }
 

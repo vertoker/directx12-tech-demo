@@ -11,6 +11,8 @@ extern IApplication* EntryApplication();
 /// <param name="nCmdShow">      Command to show window or not         </param>
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
 {
+	Logger logger;
+
 	IApplication* entryApplication = EntryApplication();
 
 	entryApplication->Initialize();

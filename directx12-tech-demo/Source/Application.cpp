@@ -15,7 +15,8 @@ Application::~Application()
 
 VOID Application::Initialize()
 {
-	MessageBox(0, L"Initialize", L"Message", 0);
+	//MessageBox(0, L"Initialize", L"Message", 0); // annoying and block thread
+	//OutputDebugString(L"Initialize Debug String"); // works only in debug console
 }
 VOID Application::Update()
 {
