@@ -19,5 +19,5 @@ VOID Application::Initialize()
 }
 VOID Application::Update()
 {
-
+	//MessageBox(0, L"Update", L"Message", 0);
 }

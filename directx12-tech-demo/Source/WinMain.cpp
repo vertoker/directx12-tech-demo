@@ -34,33 +34,11 @@ HICON hIcon; // default program icon
 VOID InitializeGlobalVariables();
 VOID InitializeWindowClass();
 VOID InitializeWindow();
-VOID MessageLoop();
 
 LRESULT CALLBACK CreateWindowProcess(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam);
 
 #pragma endregion
 /* ---------------------------------------------------------- */
-
-/* ---------------------------------------------------------- */
-/* Entry Point                                                */
-/* ---------------------------------------------------------- */
-#pragma region Entry Point
-
-/// <summary>                    main(), but for Windows               </summary>
-/// <param name="hInstance">     Windows instance of this program      </param>
-/// <param name="hPrevInstance"> Previous instance of legacy programs  </param>
-/// <param name="lpCmdLine">     C-string of input arguments in launch </param>
-/// <param name="nCmdShow">      Command to show window or not         </param>
-/*int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, INT nCmdShow)
-{
-	InitializeGlobalVariables();
-	InitializeWindowClass();
-	InitializeWindow();
-	MessageLoop();
-	return 0;
-}*/
-
-#pragma endregion
 
 /* ---------------------------------------------------------- */
 /* Definitions                                                */
@@ -128,20 +106,6 @@ VOID InitializeWindow()
 	}
 
 	ShowWindow(hWnd, SW_SHOW); // show window with SHOW command (nCmdShow by default)
-}
-
-VOID MessageLoop()
-{
-	MSG msg = { 0 }; // message class for events
-
-	while (msg.message != WM_QUIT) // run program until received message is quit
-	{
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) // if any messages are received
-		{
-			TranslateMessage(&msg); // translate messages
-			DispatchMessage(&msg);  // send messages to Windows system
-		}
-	}
 }
 
 /// <summary>              Create new WindowProc, for this app   </summary>

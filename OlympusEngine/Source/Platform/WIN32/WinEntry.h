@@ -14,7 +14,21 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	IApplication* entryApplication = EntryApplication();
 
 	entryApplication->Initialize();
-	entryApplication->Update();
+
+	MSG msg = { 0 }; // message class for events
+
+	while (msg.message != WM_QUIT) // run program until received message is quit
+	{
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) // if any messages are received
+		{
+			TranslateMessage(&msg); // translate messages
+			DispatchMessage(&msg);  // send messages to Windows system
+		}
+		else
+		{
+			entryApplication->Update();
+		}
+	}
 
 	delete entryApplication;
 
